@@ -21,4 +21,5 @@ export interface Internship {
   description: string;
   requiredSkills: string[];
   sector: string;
+  deadline: string; // YYYY-MM-DD format
 }
