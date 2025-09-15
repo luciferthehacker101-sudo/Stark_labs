@@ -46,6 +46,30 @@ VETAN simplifies this process by providing **3-5 highly personalized internship 
 └── index.html          # The main HTML file with importmaps
 ```
 
+## 🏃‍♀️ Getting Started
+
+This project is designed to run directly in the browser with no build process.
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/vetan-internship-advisor.git
+    cd vetan-internship-advisor
+    ```
+
+2.  **API Key Configuration:**
+    This application is designed to use an API key provided through the `process.env.API_KEY` environment variable. Ensure this is configured in your deployment environment.
+
+3.  **Run a local server:**
+    Serve the project's root directory using a simple local web server. For example, using Python:
+    ```bash
+    python -m http.server
+    ```
+    Or using Node.js with the `serve` package:
+    ```bash
+    npx serve .
+    ```
+
+4.  Open your browser and navigate to the local server's address (e.g., `http://localhost:8000`).
 
 ## Contributing
 
@@ -53,4 +77,5 @@ Contributions are welcome! If you have ideas for improvements or find any bugs, 
 
 ## License
 
+This project is licensed under the MIT License.
 This project is licensed under the MIT License.
