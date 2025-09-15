@@ -15,7 +15,6 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ onSubmit }) => {
     address: '',
     gender: '',
   });
-  const [ageError, setAgeError] = useState<string | null>(null);
   const { t } = useLocalization();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -28,27 +27,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ onSubmit }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const birthDate = new Date(profile.dob);
-    if (isNaN(birthDate.getTime())) {
-      setAgeError("Please enter a valid date of birth."); // Should be translated in a real app
-      return;
-    }
-    
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDifference = today.getMonth() - birthDate.getMonth();
-    
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-
-    if (age < 21) {
-        setAgeError(t('ageValidationError'));
-        return;
-    }
-    
-    setAgeError(null);
+    // Removed age validation to allow all youth to apply.
     onSubmit(profile);
   };
 
@@ -67,7 +46,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="relative">
-        <label htmlFor="fullName" className="block text-sm font-medium text-slate-600 mb-1">{t('fullNameLabel')}</label>
+        <label htmlFor="fullName" className="block text-sm font-medium text-green-dark mb-1">{t('fullNameLabel')}</label>
         {renderInputIcon('name')}
         <input
           type="text"
@@ -76,14 +55,14 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ onSubmit }) => {
           value={profile.fullName}
           onChange={handleChange}
           placeholder={t('fullNamePlaceholder')}
-          className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
+          className="w-full pl-10 pr-4 py-2 border border-khaki-medium rounded-lg focus:ring-olive-medium focus:border-olive-medium transition bg-white"
           required
           aria-required="true"
         />
       </div>
 
       <div className="relative">
-        <label htmlFor="dob" className="block text-sm font-medium text-slate-600 mb-1">{t('dobLabel')}</label>
+        <label htmlFor="dob" className="block text-sm font-medium text-green-dark mb-1">{t('dobLabel')}</label>
         {renderInputIcon('dob')}
         <input
           type="date"
@@ -91,14 +70,14 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ onSubmit }) => {
           id="dob"
           value={profile.dob}
           onChange={handleChange}
-          className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
+          className="w-full pl-10 pr-4 py-2 border border-khaki-medium rounded-lg focus:ring-olive-medium focus:border-olive-medium transition bg-white"
           required
           aria-required="true"
         />
       </div>
       
       <div className="relative">
-        <label htmlFor="contactNumber" className="block text-sm font-medium text-slate-600 mb-1">{t('contactNumberLabel')}</label>
+        <label htmlFor="contactNumber" className="block text-sm font-medium text-green-dark mb-1">{t('contactNumberLabel')}</label>
         {renderInputIcon('phone')}
         <input
           type="tel"
@@ -107,14 +86,14 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ onSubmit }) => {
           value={profile.contactNumber}
           onChange={handleChange}
           placeholder={t('contactNumberPlaceholder')}
-          className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
+          className="w-full pl-10 pr-4 py-2 border border-khaki-medium rounded-lg focus:ring-olive-medium focus:border-olive-medium transition bg-white"
           required
           aria-required="true"
         />
       </div>
 
       <div className="relative">
-        <label htmlFor="address" className="block text-sm font-medium text-slate-600 mb-1">{t('addressLabel')}</label>
+        <label htmlFor="address" className="block text-sm font-medium text-green-dark mb-1">{t('addressLabel')}</label>
         {renderInputIcon('address')}
         <textarea
           name="address"
@@ -123,21 +102,21 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ onSubmit }) => {
           value={profile.address}
           onChange={handleChange}
           placeholder={t('addressPlaceholder')}
-          className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
+          className="w-full pl-10 pr-4 py-2 border border-khaki-medium rounded-lg focus:ring-olive-medium focus:border-olive-medium transition bg-white"
           required
           aria-required="true"
         />
       </div>
       
       <div className="relative">
-          <label htmlFor="gender" className="block text-sm font-medium text-slate-600 mb-1">{t('genderLabel')}</label>
+          <label htmlFor="gender" className="block text-sm font-medium text-green-dark mb-1">{t('genderLabel')}</label>
           {renderInputIcon('gender')}
           <select
             name="gender"
             id="gender"
             value={profile.gender}
             onChange={handleChange}
-            className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition appearance-none"
+            className="w-full pl-10 pr-4 py-2 border border-khaki-medium rounded-lg focus:ring-olive-medium focus:border-olive-medium transition appearance-none bg-white"
             required
             aria-required="true"
           >
@@ -153,16 +132,10 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ onSubmit }) => {
           </div>
       </div>
 
-      {ageError && (
-        <div className="text-sm text-red-600 text-center" role="alert">
-          {ageError}
-        </div>
-      )}
-
       <div>
         <button
           type="submit"
-          className="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-300"
+          className="w-full bg-green-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-green-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-primary transition-colors duration-300"
         >
           {t('nextButton')}
         </button>
