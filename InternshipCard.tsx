@@ -1,5 +1,7 @@
 import React from 'react';
 import { Internship } from '../types';
+import React from 'react';
+import { Internship } from '../types';
 import { useLocalization } from '../context/LocalizationContext';
 
 interface InternshipCardProps {
@@ -32,3 +34,4 @@ export const InternshipCard: React.FC<InternshipCardProps> = ({ internship, isRe
     </div>
   );
 };
+
